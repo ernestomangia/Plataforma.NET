@@ -1,11 +1,18 @@
 ﻿using System;
+using System.Data.Entity;
+
+using AccesoDatos;
+using Modelo;
 
 namespace Consola
 {
+
     public class Program
     {
         public static void Main(string[] args)
         {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contexto>());
+            
             // Menu
             Console.WriteLine("¡Bienvenido!");
             Console.WriteLine("----------------------MENU----------------------");
@@ -18,8 +25,20 @@ namespace Consola
             switch (opcion)
             {
                 case "A":
-                    
-                    break;
+                    var gerente = new GerenteModelo
+                                      {
+                                          Nombre = "Juan",
+                                          Apellido = "Perez",
+                                          Password = "pass",
+                                          User = "user"
+                                      };
+                    using (var contexto = new Contexto())
+                    {
+                        contexto.Gerentes.Add(gerente);
+                        contexto.SaveChanges();
+                    }
+
+            break;
                 case "B":
                     
                     break;

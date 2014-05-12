@@ -5,11 +5,11 @@ using Modelo;
 
 namespace AccesoDatos
 {
-    public class Context : DbContext
+    public class Contexto : DbContext
     {
-        private DbSet<GerenteModelo> Gerentes { get; set; }
+        public DbSet<GerenteModelo> Gerentes { get; set; }
 
-        private DbSet<ProyectoCaracterizadoModelo> ProyectosCaracterizados { get; set; }
+        public DbSet<ProyectoCaracterizadoModelo> ProyectosCaracterizados { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
