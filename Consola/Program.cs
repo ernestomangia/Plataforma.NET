@@ -6,12 +6,13 @@ using Modelo;
 
 namespace Consola
 {
+    using System.Collections.Generic;
 
     public class Program
     {
         public static void Main(string[] args)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contexto>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<Contexto>());
             
             // Menu
             Console.WriteLine("¡Bienvenido!");
@@ -26,15 +27,31 @@ namespace Consola
             {
                 case "A":
                     var gerente = new GerenteModelo
-                                      {
-                                          Nombre = "Juan",
-                                          Apellido = "Perez",
-                                          Password = "pass",
-                                          User = "user"
-                                      };
+                    {
+                        Nombre = "Juan",
+                        Apellido = "Perez",
+                        Password = "pass",
+                        User = "user"
+                    };
+
+                    var proyecto = new ProyectoCaracterizadoModelo
+                                       {
+                                           Descripcion = "Proyecto 1 ",
+                                           TipoProyecto = string.Empty,
+                                           Fecha = DateTime.Now,
+                                           Titulo = string.Empty,
+                                           ValorCaracterizacion = 22.1,
+                                           Gerente = gerente
+                                       };
+
+                    //gerente.ProyectoCaracterizados = new List<ProyectoCaracterizadoModelo>
+                    //                                     {
+                    //                                         proyecto
+                    //                                     };
                     using (var contexto = new Contexto())
                     {
                         contexto.Gerentes.Add(gerente);
+                        contexto.ProyectosCaracterizados.Add(proyecto);
                         contexto.SaveChanges();
                     }
 
@@ -49,6 +66,7 @@ namespace Consola
                     Console.WriteLine("Opción incorrecta. Intente nuevamente");
                     break;
             }
+            Console.WriteLine("listo");
 
             Console.ReadKey();
         }
