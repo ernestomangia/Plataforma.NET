@@ -10,12 +10,13 @@ namespace AccesoDatos.Configuracion
         public GerenteConfiguracion()
         {
             this.ToTable("Gerentes");
-            HasKey(g => g.Codigo).Property(g => g.Codigo).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            HasKey(g => g.Codigo).Property(g => g.Codigo)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(g => g.Nombre).HasMaxLength(50).IsRequired();
             Property(g => g.Apellido).HasMaxLength(50).IsRequired();
             Property(g => g.User).HasMaxLength(30).IsRequired();
             Property(g => g.Password).HasMaxLength(20).IsRequired();
-            
+
             this.HasMany(g => g.ProyectoCaracterizados);
         }
     }

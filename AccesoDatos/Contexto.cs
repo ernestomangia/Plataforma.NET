@@ -16,10 +16,14 @@ namespace AccesoDatos
 
         public DbSet<ProyectoCaracterizadoModelo> ProyectosCaracterizados { get; set; }
 
+        public DbSet<FactorModelo> Factores { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new GerenteConfiguracion());
             modelBuilder.Configurations.Add(new ProyectoCaracterizadoConfiguracion());
+            modelBuilder.Configurations.Add(new FactorConfiguracion());
+            modelBuilder.Configurations.Add(new ValorFactorConfiguracion());
         }
     }
 }

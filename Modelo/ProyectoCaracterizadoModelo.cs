@@ -1,14 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Modelo
 {
     public class ProyectoCaracterizadoModelo
     {
-        [Key]
         public int Codigo { get; set; }
 
-        [StringLength(50)]
         public string Titulo { get; set; }
 
         public string Descripcion { get; set; }
@@ -17,9 +15,10 @@ namespace Modelo
 
         public double ValorCaracterizacion { get; set; }
 
-        [StringLength(50)]
         public string TipoProyecto { get; set; }
 
         public GerenteModelo Gerente { get; set; }
+
+        public List<FactorModelo> Factores { get; set; }
     }
 }

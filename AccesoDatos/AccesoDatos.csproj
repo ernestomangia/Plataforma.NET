@@ -57,8 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuracion\FactorConfiguracion.cs" />
     <Compile Include="Configuracion\ProyectoCaracterizadoConfiguracion.cs" />
     <Compile Include="Configuracion\GerenteConfiguracion.cs" />
+    <Compile Include="Configuracion\ValorFactorConfiguracion.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

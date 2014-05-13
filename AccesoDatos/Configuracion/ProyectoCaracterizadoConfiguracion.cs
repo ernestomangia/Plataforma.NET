@@ -16,7 +16,16 @@ namespace AccesoDatos.Configuracion
             Property(p => p.Fecha).IsRequired();
             Property(p => p.TipoProyecto).HasMaxLength(50).IsRequired();
 
-            this.HasRequired(p => p.Gerente);
+            this.HasMany(p => p.Factores).WithMany(f => f.Proyectos).Map(
+                m =>
+                    {
+                        m.MapLeftKey("Factor_Codigo");
+                        m.MapRightKey("Proyecto_Codigo");
+                        m.ToTable("FactoresProyectos");
+                    });
+
+
+            // this.HasRequired(p => p.Gerente);
         }
     }
 }
