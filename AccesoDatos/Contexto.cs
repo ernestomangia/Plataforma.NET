@@ -8,7 +8,9 @@ namespace AccesoDatos
     public class Contexto : DbContext
     {
         public Contexto()
-            : base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
+
+            // : base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
+            : base("TrabajoPracticoBD")
         {
         }
         
