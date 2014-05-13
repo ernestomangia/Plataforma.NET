@@ -34,26 +34,9 @@ namespace Consola
                 switch (opcion)
                 {
                     case "A":
-                        Console.WriteLine("1 - Alta Gerente");
-                        Console.WriteLine("2 - Baja Gerente");
-                        Console.WriteLine("3 - Modificacion Gerente");
-                        Console.WriteLine("4 - Menu Principal");
-                        Console.WriteLine();
-                        Console.WriteLine("Ingrese una opcion");
 
-                        Console.WriteLine("Nombre           Apellido            User            Password");
-                        using (var contexto = new Contexto())
-                        {
-                            foreach (var g in contexto.Gerentes)
-                            {
-                                Console.Write("{0}          {1}         {2}         {3}", g.Nombre, g.Apellido, g.User,
-                                    g.Password);
-                            }
-
-                        }
-
-                        var opcionGerente = Console.ReadKey().KeyChar.ToString();
-                        Console.Clear();
+                        var opcionGerente = DibujarMenuGerente();
+                        
 
                         switch (opcionGerente)
                         {
@@ -99,6 +82,7 @@ namespace Consola
                                     contexto.SaveChanges();
 
                                 }
+
 
                                 break;
 
@@ -152,5 +136,33 @@ namespace Consola
                 Console.WriteLine("listo");
             Console.ReadKey();
         }
+
+        public static string DibujarMenuGerente()
+        {
+            Console.WriteLine("1 - Alta Gerente");
+            Console.WriteLine("2 - Baja Gerente");
+            Console.WriteLine("3 - Modificacion Gerente");
+            Console.WriteLine("4 - Menu Principal");
+            Console.WriteLine();
+            Console.WriteLine("Ingrese una opcion");
+
+            Console.WriteLine("Nombre           Apellido            User            Password");
+            using (var contexto = new Contexto())
+            {
+                foreach (var g in contexto.Gerentes)
+                {
+                    Console.Write("{0}          {1}         {2}         {3}", g.Nombre, g.Apellido, g.User,
+                        g.Password);
+                }
+
+            }
+
+            var opcionGerente = Console.ReadKey().KeyChar.ToString();
+            Console.Clear();
+
+            return opcionGerente;
+        }
+
+
     }
 }
