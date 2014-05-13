@@ -7,13 +7,14 @@ using Modelo;
 namespace Consola
 {
     using System.Collections.Generic;
+    using System.Globalization;
 
     public class Program
     {
         public static void Main(string[] args)
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contexto>());
-            
+
             // Menu
             Console.WriteLine("¡Bienvenido!");
             Console.WriteLine("----------------------MENU----------------------");
@@ -21,7 +22,7 @@ namespace Consola
             Console.WriteLine("B - ABMC Proyecto");
             Console.WriteLine("C - ABMC Factor");
             Console.WriteLine("Ingrese una opción: ");
-            
+
             var opcion = Console.ReadKey().KeyChar.ToString().ToUpper();
             Console.Clear();
 
@@ -40,7 +41,7 @@ namespace Consola
                     {
                         foreach (var g in contexto.Gerentes)
                         {
-                            Console.Write("{0}          {1}         {2}         {3}",g.Nombre,g.Apellido,g.User,g.Password);
+                            Console.Write("{0}          {1}         {2}         {3}", g.Nombre, g.Apellido, g.User, g.Password);
                         }
 
                     }
@@ -51,7 +52,7 @@ namespace Consola
                     switch (opcionGerente)
                     {
                         case "1":
-                           
+
                             Console.WriteLine("Ingrese Nombre de Gerente");
                             var nombre = Console.ReadLine();
 
@@ -63,7 +64,7 @@ namespace Consola
                             var user = Console.ReadLine();
 
                             var gerente = new GerenteModelo
-                            {   
+                            {
                                 Nombre = nombre,
                                 Apellido = apellido,
                                 Password = password,
@@ -86,40 +87,40 @@ namespace Consola
                             break;
 
                         case "4":
-      
+
 
                             break;
 
 
                     }
 
-                  /*  var proyecto = new ProyectoCaracterizadoModelo
-                                       {
-                                           Descripcion = "Proyecto 1 ",
-                                           TipoProyecto = string.Empty,
-                                           Fecha = DateTime.Now,
-                                           Titulo = string.Empty,
-                                           ValorCaracterizacion = 22.1,
-                                           Gerente = gerente
-                                       };*/
+                    /*  var proyecto = new ProyectoCaracterizadoModelo
+                                         {
+                                             Descripcion = "Proyecto 1 ",
+                                             TipoProyecto = string.Empty,
+                                             Fecha = DateTime.Now,
+                                             Titulo = string.Empty,
+                                             ValorCaracterizacion = 22.1,
+                                             Gerente = gerente
+                                         };*/
 
                     //gerente.ProyectoCaracterizados = new List<ProyectoCaracterizadoModelo>
                     //                                     {
                     //                                         proyecto
                     //                                     };
-               /*     using (var contexto = new Contexto())
-                    {
-                        contexto.Gerentes.Add(gerente);
-                        contexto.ProyectosCaracterizados.Add(proyecto);
-                        contexto.SaveChanges();
-                    }
-                    */
+                    /*     using (var contexto = new Contexto())
+                         {
+                             contexto.Gerentes.Add(gerente);
+                             contexto.ProyectosCaracterizados.Add(proyecto);
+                             contexto.SaveChanges();
+                         }
+                         */
                     break;
                 case "B":
-                    
+
                     break;
                 case "C":
-                    
+
                     break;
                 default:
                     Console.WriteLine("Opción incorrecta. Intente nuevamente");
@@ -128,6 +129,21 @@ namespace Consola
             Console.WriteLine("listo");
 
             Console.ReadKey();
+        }
+
+        public string DibujarMenuPrincipal()
+        {
+            // Menu
+            Console.WriteLine("¡Bienvenido!");
+            Console.WriteLine("----------------------MENU PRINCIPAL----------------------");
+            Console.WriteLine("A - ABMC Gerente");
+            Console.WriteLine("B - ABMC Proyecto");
+            Console.WriteLine("C - ABMC Factor");
+            Console.WriteLine("Ingrese una opción: ");
+
+            var opcion = Console.ReadKey().KeyChar.ToString().ToUpper();
+            Console.Clear();
+            return opcion;
         }
     }
 }
