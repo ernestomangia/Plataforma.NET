@@ -25,7 +25,7 @@ namespace Consola
 
                         // Menu Gerente
                         var opcionGerente = DibujarMenuGerente();
-                        
+
                         switch (opcionGerente)
                         {
                             case "1":
@@ -57,7 +57,7 @@ namespace Consola
                             case "2":
                                 Console.WriteLine("----------------------BAJA GERENTE----------------------");
                                 Console.WriteLine("Ingrese ID de Gerente a dar de baja");
-                                
+
                                 var idGerente = Convert.ToInt32(Console.ReadLine());
 
                                 using (var contexto = new Contexto())
@@ -65,13 +65,10 @@ namespace Consola
                                     contexto.Gerentes.Remove(contexto.Gerentes.Find(idGerente));
                                     try
                                     {
-                                    contexto.SaveChanges();
+                                        if (contexto.SaveChanges() == 1)
+                                            Console.WriteLine("Se ha eliminado exitosamente");
 
-
-                                if (contexto.SaveChanges() == 1)
-                                    Console.WriteLine("Se ha eliminado exitosamente");
-
-                                }
+                                    }
                                     catch (DbUpdateException ex)
                                     {
                                         Console.WriteLine("No se puede borrar el Gerente seleccionado debido a que esta relacionado a otra/s entidad/es");
@@ -81,32 +78,32 @@ namespace Consola
                                 break;
                             case "3":
 
-                            Console.WriteLine("Ingrese ID de Gerente que desea modificar y presione enter");
-                            var id_Gerente_Modificar = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("Ingrese ID de Gerente que desea modificar y presione enter");
+                                var id_Gerente_Modificar = Convert.ToInt32(Console.ReadLine());
 
 
 
-                            using (var contexto = new Contexto())
-                            {
+                                using (var contexto = new Contexto())
+                                {
 
-                                var gerenteUpdate = contexto.Gerentes.Find(id_Gerente_Modificar);
+                                    var gerenteUpdate = contexto.Gerentes.Find(id_Gerente_Modificar);
 
-                                Console.WriteLine("Ingrese el nombre de Gerente");
-                                gerenteUpdate.Nombre = Console.ReadLine().ToString();
+                                    Console.WriteLine("Ingrese el nombre de Gerente");
+                                    gerenteUpdate.Nombre = Console.ReadLine().ToString();
 
-                                Console.WriteLine("Ingrese apellido de Gerente");
-                                gerenteUpdate.Apellido = Console.ReadLine().ToString();
+                                    Console.WriteLine("Ingrese apellido de Gerente");
+                                    gerenteUpdate.Apellido = Console.ReadLine().ToString();
 
-                                Console.WriteLine("Ingrese user de Gerente");
-                                gerenteUpdate.User = Console.ReadLine().ToString();
+                                    Console.WriteLine("Ingrese user de Gerente");
+                                    gerenteUpdate.User = Console.ReadLine().ToString();
 
-                                Console.WriteLine("Ingrese password de Gerente");
-                                gerenteUpdate.Password = Console.ReadLine().ToString();
+                                    Console.WriteLine("Ingrese password de Gerente");
+                                    gerenteUpdate.Password = Console.ReadLine().ToString();
 
-                                if (contexto.SaveChanges() == 1)
-                                    Console.WriteLine("Se ha modificado exitosamente");
+                                    if (contexto.SaveChanges() == 1)
+                                        Console.WriteLine("Se ha modificado exitosamente");
 
-                            }
+                                }
 
                                 break;
                             case "4":
@@ -151,12 +148,12 @@ namespace Consola
                         Console.ReadKey();
                         break;
                 }
-                
+
                 Console.Clear();
                 opcion = DibujarMenuPrincipal();
             }
         }
-            
+
         public static string DibujarMenuPrincipal()
         {
             // Menu
@@ -169,7 +166,7 @@ namespace Consola
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Ingrese una opción: ");
-           
+
             var opcion = Console.ReadKey().KeyChar.ToString().ToUpper();
             Console.Clear();
             return opcion;
