@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Data.Entity;
 
 using AccesoDatos;
@@ -14,18 +15,23 @@ namespace Consola
         public static void Main(string[] args)
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contexto>());
-
+            
+            
             // Menu
             Console.WriteLine("¡Bienvenido!");
             Console.WriteLine("----------------------MENU----------------------");
             Console.WriteLine("A - ABMC Gerente");
             Console.WriteLine("B - ABMC Proyecto");
             Console.WriteLine("C - ABMC Factor");
+                Console.WriteLine("D - SALIR");
+                Console.WriteLine();
             Console.WriteLine("Ingrese una opción: ");
-
+            
             var opcion = Console.ReadKey().KeyChar.ToString().ToUpper();
             Console.Clear();
 
+               
+           
             switch (opcion)
             {
                 case "A":
@@ -41,7 +47,8 @@ namespace Consola
                     {
                         foreach (var g in contexto.Gerentes)
                         {
-                            Console.Write("{0}          {1}         {2}         {3}", g.Nombre, g.Apellido, g.User, g.Password);
+                                Console.Write("{0}          {1}         {2}         {3}", g.Nombre, g.Apellido, g.User,
+                                    g.Password);
                         }
 
                     }
@@ -52,7 +59,7 @@ namespace Consola
                     switch (opcionGerente)
                     {
                         case "1":
-
+                           
                             Console.WriteLine("Ingrese Nombre de Gerente");
                             var nombre = Console.ReadLine();
 
@@ -64,7 +71,7 @@ namespace Consola
                             var user = Console.ReadLine();
 
                             var gerente = new GerenteModelo
-                            {
+                            {   
                                 Nombre = nombre,
                                 Apellido = apellido,
                                 Password = password,
@@ -81,53 +88,69 @@ namespace Consola
                             break;
 
                         case "2":
+                                Console.WriteLine("Ingrese ID de Gerente a dar de baja");
+                                
+                                var id_Gerente = Convert.ToInt32(Console.ReadLine());
+
+
+                                using (var contexto = new Contexto())
+                                {
+                                   
+                                    contexto.Gerentes.Remove(contexto.Gerentes.Find(id_Gerente));
+                                    contexto.SaveChanges();
+
+                                }
+
                             break;
 
                         case "3":
                             break;
 
                         case "4":
-
-
+      
                             break;
-
+                            default:
+                                Console.WriteLine("Opción Incorrecta");
+                                break;
 
                     }
 
-                    /*  var proyecto = new ProyectoCaracterizadoModelo
-                                         {
-                                             Descripcion = "Proyecto 1 ",
-                                             TipoProyecto = string.Empty,
-                                             Fecha = DateTime.Now,
-                                             Titulo = string.Empty,
-                                             ValorCaracterizacion = 22.1,
-                                             Gerente = gerente
-                                         };*/
+                  /*  var proyecto = new ProyectoCaracterizadoModelo
+                                       {
+                                           Descripcion = "Proyecto 1 ",
+                                           TipoProyecto = string.Empty,
+                                           Fecha = DateTime.Now,
+                                           Titulo = string.Empty,
+                                           ValorCaracterizacion = 22.1,
+                                           Gerente = gerente
+                                       };*/
 
                     //gerente.ProyectoCaracterizados = new List<ProyectoCaracterizadoModelo>
                     //                                     {
                     //                                         proyecto
                     //                                     };
-                    /*     using (var contexto = new Contexto())
-                         {
-                             contexto.Gerentes.Add(gerente);
-                             contexto.ProyectosCaracterizados.Add(proyecto);
-                             contexto.SaveChanges();
-                         }
-                         */
+               /*     using (var contexto = new Contexto())
+                    {
+                        contexto.Gerentes.Add(gerente);
+                        contexto.ProyectosCaracterizados.Add(proyecto);
+                        contexto.SaveChanges();
+                    }
+                    */
                     break;
                 case "B":
-
+                    
                     break;
                 case "C":
-
+                    
                     break;
                 default:
                     Console.WriteLine("Opción incorrecta. Intente nuevamente");
                     break;
+                
+            
+           
             }
             Console.WriteLine("listo");
-
             Console.ReadKey();
         }
 
