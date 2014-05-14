@@ -9,6 +9,7 @@ using Modelo;
 
 namespace Consola
 {
+    using System.Collections.Generic;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
 
@@ -48,6 +49,7 @@ namespace Consola
                                     Apellido = apellido,
                                     Password = password,
                                     User = user
+                                   
                                 };
 
                                 using (var contexto = new Contexto())
