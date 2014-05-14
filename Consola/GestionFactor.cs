@@ -75,6 +75,7 @@ namespace Consola
             Console.WriteLine("VALOR 2");
             Console.WriteLine("Ingrese Nombre");
             var v3 = Console.ReadLine();
+            Console.WriteLine();
 
             var factor = new FactorModelo
             {
@@ -119,8 +120,7 @@ namespace Consola
 
                 catch (DbEntityValidationException ex)
                 {
-                    Console.WriteLine("No se ha podido insertar. Presione una tecla para continuar...");
-                    Console.ReadKey();
+                    Console.WriteLine("No se ha podido insertar.");
                 }
             }
 
@@ -159,8 +159,7 @@ namespace Consola
                     catch (DbUpdateException ex)
                     {
                         Console.WriteLine(
-                            "No se puede borrar el factor seleccionado. Presione una tecla para continuar...");
-                        Console.ReadKey();
+                            "No se puede borrar el factor seleccionado.");
                     }
 
                 }
@@ -197,14 +196,9 @@ namespace Consola
                     Console.WriteLine();
                     Console.WriteLine("Ingrese nombre del valor 1 asociado al factor");
                     factorUpdate.Valores[0].Nombre = Console.ReadLine();
-
-                    //factorUpdate.Valores[0].Valor = Convert.ToDouble(Console.ReadLine());
                     Console.WriteLine("Ingrese nombre del valor 2 asociado al factor");
                     factorUpdate.Valores[1].Nombre = Console.ReadLine();
-                    //factorUpdate.Valores[1].Valor = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine();
                     Console.WriteLine("Ingrese nombre del valor 3 asociado al factor");
-                    Console.WriteLine();
                     factorUpdate.Valores[2].Nombre = Console.ReadLine();
 
                     try

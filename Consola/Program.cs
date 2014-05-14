@@ -26,9 +26,9 @@ namespace Consola
                         var opcionGerente = gestionGerente.DibujarMenuGerente();
                         while (opcionGerente != "4")
                         {
-                        switch (opcionGerente)
-                        {
-                            case "1":
+                            switch (opcionGerente)
+                            {
+                                case "1":
                                     gestionGerente.AltaGerente();
                                     break;
                                 case "2":
@@ -42,65 +42,75 @@ namespace Consola
                                 default:
                                     Console.WriteLine("Opción incorrecta. Intente nuevamente.");
                                     break;
-                                    }
+                            }
 
                             Console.WriteLine();
                             Console.WriteLine("Presione una tecla para continuar...");
-                                        Console.ReadKey();
+                            Console.ReadKey();
                             Console.Clear();
                             opcionGerente = gestionGerente.DibujarMenuGerente();
-                                    }
+                        }
 
-                                break;
+                        break;
                     case "B":
 
                         // Menu Proyecto
                         var opcionProyecto = gestionProyecto.DibujarMenuProyecto();
                         while (opcionProyecto != "4")
-                                {
+                        {
                             switch (opcionProyecto)
-                                    {
+                            {
                                 case "1":
                                     gestionProyecto.AltaProyecto();
-                                break;
+                                    break;
                                 case "2":
                                     gestionProyecto.EliminarProyecto();
                                     break;
-                            case "3":
+                                case "3":
                                     gestionProyecto.ModificarProyecto();
-                                break;
-                            case "4":
-                                break;
-                            default:
+                                    break;
+                                case "4":
+                                    break;
+                                default:
                                     Console.WriteLine("Opción incorrecta. Intente nuevamente.");
-                                break;
-                        }
+                                    break;
+                            }
                             Console.WriteLine();
                             Console.WriteLine("Presione una tecla para continuar...");
                             Console.ReadKey();
                             Console.Clear();
                             opcionProyecto = gestionProyecto.DibujarMenuProyecto();
-                         }
+                        }
                         break;
                     case "C":
                         var opcionFactor = gestionFactor.DibujarMenuFactor();
 
-                        while(opcionFactor!="4")
-                        {switch (opcionFactor)
-                        {   case "1":
-                               
-                                    gestion.AltaFactor();
-                                break;
+                        while (opcionFactor != "4")
+                        {
+                            switch (opcionFactor)
+                            {
+                                case "1":
+                                    gestionFactor.AltaFactor();
+                                    break;
 
-                            case "2":
-                                gestion.BajaFactor();
-                                break;
+                                case "2":
+                                    gestionFactor.BajaFactor();
+                                    break;
 
-                            case "3":
-                                gestion.ModificarFactor();
-                                break;
-                        }
-                            opcionFactor = gestion.DibujarMenuFactor();
+                                case "3":
+                                    gestionFactor.ModificarFactor();
+                                    break;
+                                case "4":
+                                    break;
+                                default:
+                                    Console.WriteLine("Opción incorrecta. Intente nuevamente.");
+                                    break;
+                            }
+                            Console.WriteLine();
+                            Console.WriteLine("Presione una tecla para continuar...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            opcionFactor = gestionFactor.DibujarMenuFactor();
                         }
 
                         break;
