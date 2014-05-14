@@ -24,6 +24,8 @@ namespace AccesoDatos.Configuracion
                         m.MapRightKey("Proyecto_Codigo");
                         m.ToTable("FactoresProyectos");
                     });
+
+            HasOptional(p => p.Gerente).WithMany();
         }
     }
 }

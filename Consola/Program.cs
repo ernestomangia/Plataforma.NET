@@ -1,23 +1,18 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
-using System.Timers;
-using AccesoDatos;
-using Modelo;
 
+using AccesoDatos;
 
 namespace Consola
 {
-    using System.Collections.Generic;
-    using System.Data.Entity.Infrastructure;
-    using System.Linq;
-
     public class Program
     {
         public static void Main(string[] args)
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contexto>());
+            var gestionProyecto = new GestionProyecto();
+            var gestionGerente = new GestionGerente();
+            var gestionFactor = new GestionFactor();
 
             // Menu Principal
             var opcion = DibujarMenuPrincipal();
@@ -28,137 +23,67 @@ namespace Consola
                     case "A":
 
                         // Menu Gerente
-                        var opcionGerente = DibujarMenuGerente();
-
+                        var opcionGerente = gestionGerente.DibujarMenuGerente();
+                        while (opcionGerente != "4")
+                        {
                         switch (opcionGerente)
                         {
                             case "1":
-                                Console.WriteLine("----------------------ALTA GERENTE----------------------");
-                                Console.WriteLine("Ingrese Nombre");
-                                var nombre = Console.ReadLine();
-                                Console.WriteLine("Ingrese Apellido");
-                                var apellido = Console.ReadLine();
-                                Console.WriteLine("Ingrese Password");
-                                var password = Console.ReadLine();
-                                Console.WriteLine("Ingrese User");
-                                var user = Console.ReadLine();
-
-                                var gerente = new GerenteModelo
-                                {
-                                    Nombre = nombre,
-                                    Apellido = apellido,
-                                    Password = password,
-                                    User = user
-                                   
-                                };
-
-                                using (var contexto = new Contexto())
-                                {
-                                    contexto.Gerentes.Add(gerente);
-                                    try
-                                    {
-                                        if (contexto.SaveChanges() == 1)
-                                            Console.WriteLine("El alta se ha relizado exitosamente");
+                                    gestionGerente.AltaGerente();
+                                    break;
+                                case "2":
+                                    gestionGerente.EliminarGerente();
+                                    break;
+                                case "3":
+                                    gestionGerente.ModificarGerente();
+                                    break;
+                                case "4":
+                                    break;
+                                default:
+                                    Console.WriteLine("Opción incorrecta. Intente nuevamente.");
+                                    break;
                                     }
 
-                                    catch (DbEntityValidationException ex)
-                                    {
-                                        Console.WriteLine("No se ha podido insertar. Presione una tecla para continuar...");
+                            Console.WriteLine();
+                            Console.WriteLine("Presione una tecla para continuar...");
                                         Console.ReadKey();
-
+                            Console.Clear();
+                            opcionGerente = gestionGerente.DibujarMenuGerente();
                                     }
-                                }
 
                                 break;
-                            case "2":
-                                Console.WriteLine("----------------------BAJA GERENTE----------------------");
-                                Console.WriteLine("Ingrese ID de Gerente a dar de baja");
+                    case "B":
 
-                                var idGerente = Convert.ToInt32(Console.ReadLine());
-
-                                
-
-                                using (var contexto = new Contexto())
+                        // Menu Proyecto
+                        var opcionProyecto = gestionProyecto.DibujarMenuProyecto();
+                        while (opcionProyecto != "4")
                                 {
-                                    contexto.Gerentes.Remove(contexto.Gerentes.Find(idGerente));
-                                    try
+                            switch (opcionProyecto)
                                     {
-                                        if (contexto.SaveChanges() == 1)
-                                            Console.WriteLine("Se ha eliminado exitosamente");
-
-                                    }
-                                    catch (DbUpdateException ex)
-                                    {
-                                        Console.WriteLine("No se puede borrar el Gerente seleccionado debido a que esta relacionado a otra/s entidad/es");
-                                    }
-                                }
-
+                                case "1":
+                                    gestionProyecto.AltaProyecto();
                                 break;
+                                case "2":
+                                    gestionProyecto.EliminarProyecto();
+                                    break;
                             case "3":
-
-                                Console.WriteLine("Ingrese ID de Gerente que desea modificar y presione enter");
-                                var id_Gerente_Modificar = Convert.ToInt32(Console.ReadLine());
-
-
-
-                                using (var contexto = new Contexto())
-                                {
-
-                                    var gerenteUpdate = contexto.Gerentes.Find(id_Gerente_Modificar);
-
-                                    Console.WriteLine("Ingrese el nombre de Gerente");
-                                    gerenteUpdate.Nombre = Console.ReadLine().ToString();
-
-                                    Console.WriteLine("Ingrese apellido de Gerente");
-                                    gerenteUpdate.Apellido = Console.ReadLine().ToString();
-
-                                    Console.WriteLine("Ingrese user de Gerente");
-                                    gerenteUpdate.User = Console.ReadLine().ToString();
-
-                                    Console.WriteLine("Ingrese password de Gerente");
-                                    gerenteUpdate.Password = Console.ReadLine().ToString();
-
-                                    if (contexto.SaveChanges() == 1)
-                                        Console.WriteLine("Se ha modificado exitosamente");
-
-                                }
-
+                                    gestionProyecto.ModificarProyecto();
                                 break;
                             case "4":
                                 break;
                             default:
-                                Console.WriteLine("Opción Incorrecta");
+                                    Console.WriteLine("Opción incorrecta. Intente nuevamente.");
                                 break;
                         }
-
-                        break;
-                    case "B":
-
-                        /*  var proyecto = new ProyectoCaracterizadoModelo
-                                         {
-                                             Descripcion = "Proyecto 1 ",
-                                             TipoProyecto = string.Empty,
-                                             Fecha = DateTime.Now,
-                                             Titulo = string.Empty,
-                                             ValorCaracterizacion = 22.1,
-                                             Gerente = gerente
-                                         };*/
-
-                        //gerente.ProyectoCaracterizados = new List<ProyectoCaracterizadoModelo>
-                        //                                     {
-                        //                                         proyecto
-                        //                                     };
-                        /*     using (var contexto = new Contexto())
-                         {
-                             contexto.Gerentes.Add(gerente);
-                             contexto.ProyectosCaracterizados.Add(proyecto);
-                             contexto.SaveChanges();
+                            Console.WriteLine();
+                            Console.WriteLine("Presione una tecla para continuar...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            opcionProyecto = gestionProyecto.DibujarMenuProyecto();
                          }
-                         */
                         break;
                     case "C":
-                        var gestion = new GestionFactor();
-                        var opcionFactor = gestion.DibujarMenuFactor();
+                        var opcionFactor = gestionFactor.DibujarMenuFactor();
 
                         while(opcionFactor!="4")
                         {switch (opcionFactor)
@@ -177,7 +102,6 @@ namespace Consola
                         }
                             opcionFactor = gestion.DibujarMenuFactor();
                         }
-
 
                         break;
                     case "S":
@@ -198,7 +122,7 @@ namespace Consola
         {
             // Menu
             Console.WriteLine("¡Bienvenido!");
-            Console.WriteLine("----------------------MENU PRINCIPAL----------------------");
+            Console.WriteLine("----------------------| MENU PRINCIPAL |----------------------");
             Console.WriteLine("A - ABMC Gerente");
             Console.WriteLine("B - ABMC Proyecto");
             Console.WriteLine("C - ABMC Factor");
@@ -210,35 +134,6 @@ namespace Consola
             var opcion = Console.ReadKey().KeyChar.ToString().ToUpper();
             Console.Clear();
             return opcion;
-        }
-
-        public static string DibujarMenuGerente()
-        {
-            Console.WriteLine("----------------------MENU GERENTE----------------------");
-            Console.WriteLine("1 - Alta Gerente");
-            Console.WriteLine("2 - Baja Gerente");
-            Console.WriteLine("3 - Modificacion Gerente");
-            Console.WriteLine("4 - Menu Principal");
-            Console.WriteLine();
-            Console.WriteLine("----------------------Listado de Gerentes----------------------");
-            Console.WriteLine("Nombre           Apellido            User            Password");
-            using (var contexto = new Contexto())
-            {
-                foreach (var g in contexto.Gerentes)
-                {
-                    Console.WriteLine("{0}          {1}         {2}         {3}", g.Nombre, g.Apellido, g.User, g.Password);
-                }
-
-                if (!contexto.Gerentes.Any())
-                    Console.WriteLine("No hay gerentes cargados.");
-            }
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Ingrese una opcion");
-            var opcionGerente = Console.ReadKey().KeyChar.ToString();
-            Console.Clear();
-            return opcionGerente;
         }
     }
 }
