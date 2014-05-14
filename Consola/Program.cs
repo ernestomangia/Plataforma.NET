@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
-
+using System.Data.Entity.Validation;
+using System.Timers;
 using AccesoDatos;
 using Modelo;
+
 
 namespace Consola
 {
@@ -50,7 +53,18 @@ namespace Consola
                                 using (var contexto = new Contexto())
                                 {
                                     contexto.Gerentes.Add(gerente);
-                                    contexto.SaveChanges();
+                                    try
+                                    {
+                                        if (contexto.SaveChanges() == 1)
+                                            Console.WriteLine("El alta se ha relizado exitosamente");
+                                    }
+
+                                    catch (DbEntityValidationException ex)
+                                    {
+                                        Console.WriteLine("No se ha podido insertar. Presione una tecla para continuar...");
+                                        Console.ReadKey();
+
+                                    }
                                 }
 
                                 break;
@@ -139,6 +153,17 @@ namespace Consola
                          */
                         break;
                     case "C":
+                        var gestion = new GestionFactor();
+                        var opcionFactor = gestion.DibujarMenuFactor();
+
+                        switch (opcionFactor)
+                        {case "1":
+                                gestion.AltaFactor();
+                                break;
+
+                        }
+
+
                         break;
                     case "S":
                         Environment.Exit(0);
