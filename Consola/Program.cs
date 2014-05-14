@@ -43,6 +43,7 @@ namespace Consola
                                     Console.WriteLine("Opción incorrecta. Intente nuevamente.");
                                     break;
                             }
+
                             Console.WriteLine();
                             Console.WriteLine("Presione una tecla para continuar...");
                             Console.ReadKey();
@@ -55,27 +56,31 @@ namespace Consola
 
                         // Menu Proyecto
                         var opcionProyecto = gestionProyecto.DibujarMenuProyecto();
-
-                        switch (opcionProyecto)
+                        while (opcionProyecto != "4")
                         {
-                            case "1":
-                                gestionProyecto.AltaProyecto();
-                                break;
-                            case "2":
-                                gestionProyecto.EliminarProyecto();
-                                break;
-                            case "3":
-                                gestionProyecto.ModificarProyecto();
-                                break;
-                            case "4":
-                                break;
-                            default:
-                                Console.WriteLine("Opción incorrecta. Intente nuevamente.");
-                                break;
+                            switch (opcionProyecto)
+                            {
+                                case "1":
+                                    gestionProyecto.AltaProyecto();
+                                    break;
+                                case "2":
+                                    gestionProyecto.EliminarProyecto();
+                                    break;
+                                case "3":
+                                    gestionProyecto.ModificarProyecto();
+                                    break;
+                                case "4":
+                                    break;
+                                default:
+                                    Console.WriteLine("Opción incorrecta. Intente nuevamente.");
+                                    break;
+                            }
+                            Console.WriteLine();
+                            Console.WriteLine("Presione una tecla para continuar...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            opcionProyecto = gestionProyecto.DibujarMenuProyecto();
                         }
-                        Console.WriteLine();
-                        Console.WriteLine("Presione una tecla para continuar...");
-                        Console.ReadKey();
                         break;
                     case "C":
                         var opcionFactor = gestionFactor.DibujarMenuFactor();
@@ -106,7 +111,7 @@ namespace Consola
         {
             // Menu
             Console.WriteLine("¡Bienvenido!");
-            Console.WriteLine("----------------------MENU PRINCIPAL----------------------");
+            Console.WriteLine("----------------------| MENU PRINCIPAL |----------------------");
             Console.WriteLine("A - ABMC Gerente");
             Console.WriteLine("B - ABMC Proyecto");
             Console.WriteLine("C - ABMC Factor");

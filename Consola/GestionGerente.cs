@@ -13,15 +13,13 @@ namespace Consola
     {
         public string DibujarMenuGerente()
         {
-            Console.WriteLine("----------------------MENU GERENTE----------------------");
+            Console.WriteLine("----------------------| MENU GERENTE |----------------------");
             Console.WriteLine("1 - Alta Gerente");
             Console.WriteLine("2 - Baja Gerente");
             Console.WriteLine("3 - Modificación Gerente");
             Console.WriteLine("4 - Menu Principal");
             Console.WriteLine();
             this.ListarGerentes();
-            Console.WriteLine();
-            Console.WriteLine();
             Console.WriteLine("Ingrese una opcion");
             var opcion = Console.ReadKey().KeyChar.ToString();
             Console.Clear();
@@ -30,7 +28,7 @@ namespace Consola
 
         public void ListarGerentes()
         {
-            Console.WriteLine("----------------------Listado de Gerentes----------------------");
+            Console.WriteLine("----------------------| LISTADO DE GERENTES |----------------------");
             Console.WriteLine(
                             "{0} | {1} | {2} | {3} | {4}",
                             "ID".PadRight(3),
@@ -55,11 +53,14 @@ namespace Consola
                 if (!contexto.Gerentes.Any())
                     Console.WriteLine("No hay gerentes cargados.");
             }
+
+            Console.WriteLine();
+            Console.WriteLine();
         }
 
         public void AltaGerente()
         {
-            Console.WriteLine("----------------------ALTA GERENTE----------------------");
+            Console.WriteLine("----------------------| ALTA GERENTE |----------------------");
             Console.WriteLine("Ingrese Nombre:");
             var nombre = Console.ReadLine();
             Console.WriteLine("Ingrese Apellido:");
@@ -89,82 +90,98 @@ namespace Consola
                 catch (DbEntityValidationException ex)
                 {
                     Console.WriteLine("Error al insertar. Intente nuevamente.");
-
-                    // Console.ReadKey();
                 }
             }
         }
 
         public void EliminarGerente()
         {
-            Console.WriteLine("----------------------BAJA GERENTE----------------------");
+            this.ListarGerentes();
+            Console.WriteLine("----------------------| BAJA GERENTE |----------------------");
             Console.WriteLine("Ingrese el ID del Gerente que desea eliminar. Luego presione enter:");
 
-            var id = Convert.ToInt32(Console.ReadLine());
+            var readLine = Console.ReadLine();
             Console.WriteLine();
+
+            int id;
+
+            if (!int.TryParse(readLine, out id))
+            {
+                Console.WriteLine("Valor inválido. Vuelva al Menu anterior e intente nuevamente.");
+                return;
+            }
 
             using (var contexto = new Contexto())
             {
                 var gerenteUpdate = contexto.Gerentes.Find(id);
-                if (gerenteUpdate != null)
-                {
-                    contexto.Gerentes.Remove(gerenteUpdate);
-                    try
-                    {
-                        if (contexto.SaveChanges() == 1)
-                            Console.WriteLine("Se eliminó exitosamente el Gerente");
-                    }
-                    catch (DbUpdateException ex)
-                    {
-                        Console.WriteLine("No se puede borrar el Gerente seleccionado debido a que esta relacionado a otra/s entidad/es");
-                    }
-                }
-                else
+
+                if (gerenteUpdate == null)
                 {
                     Console.WriteLine("El ID del Gerente ingresado no existe");
+                    return;
+                }
+
+                contexto.Gerentes.Remove(gerenteUpdate);
+
+                try
+                {
+                    if (contexto.SaveChanges() == 1)
+                        Console.WriteLine("Se eliminó exitosamente el Gerente");
+                }
+                catch (DbUpdateException ex)
+                {
+                    Console.WriteLine("No se puede borrar el Gerente seleccionado debido a que esta relacionado a otra/s entidad/es");
                 }
             }
         }
 
         public void ModificarGerente()
         {
-            Console.WriteLine("----------------------MODIFICAR GERENTE----------------------");
+            this.ListarGerentes();
+            Console.WriteLine("----------------------| MODIFICAR GERENTE |----------------------");
             Console.WriteLine("Ingrese el ID del Gerente que desea modificar. Luego presione enter:");
 
-            var id = Convert.ToInt32(Console.ReadLine());
+            var readLine = Console.ReadLine();
             Console.WriteLine();
+
+            int id;
+
+            if (!int.TryParse(readLine, out id))
+            { 
+                Console.WriteLine("Valor inválido. Vuelva al Menu anterior e intente nuevamente.");
+                return;
+            }
 
             using (var contexto = new Contexto())
             {
                 var gerenteUpdate = contexto.Gerentes.Find(id);
-                if (gerenteUpdate != null)
-                {
-                    Console.WriteLine("Ingrese Nombre:");
-                    gerenteUpdate.Nombre = Console.ReadLine();
-                    Console.WriteLine("Ingrese Apellido:");
-                    gerenteUpdate.Apellido = Console.ReadLine();
-                    Console.WriteLine("Ingrese User:");
-                    gerenteUpdate.User = Console.ReadLine();
-                    Console.WriteLine("Ingrese Password:");
-                    gerenteUpdate.Password = Console.ReadLine();
-                    Console.WriteLine();
 
-                    try
-                    {
-                        if (contexto.SaveChanges() == 1)
-                            Console.WriteLine("Se modificó exitosamente el Gerente");
-                    }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("Error al modificar un Gerente.");
-                    }
-                }
-                else
+                if (gerenteUpdate == null)
                 {
                     Console.WriteLine("El ID del Gerente ingresado no existe");
+                    return;
+                }
+
+                Console.WriteLine("Ingrese Nombre:");
+                gerenteUpdate.Nombre = Console.ReadLine();
+                Console.WriteLine("Ingrese Apellido:");
+                gerenteUpdate.Apellido = Console.ReadLine();
+                Console.WriteLine("Ingrese User:");
+                gerenteUpdate.User = Console.ReadLine();
+                Console.WriteLine("Ingrese Password:");
+                gerenteUpdate.Password = Console.ReadLine();
+                Console.WriteLine();
+
+                try
+                {
+                    if (contexto.SaveChanges() == 1)
+                        Console.WriteLine("Se modificó exitosamente el Gerente");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Error al modificar un Gerente.");
                 }
             }
-
         }
     }
 }

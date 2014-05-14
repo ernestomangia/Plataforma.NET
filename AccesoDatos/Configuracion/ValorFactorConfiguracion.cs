@@ -14,7 +14,7 @@ namespace AccesoDatos.Configuracion
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(v => v.Nombre).HasMaxLength(50).IsRequired();
 
-            HasRequired(v => v.Factor).WithMany().WillCascadeOnDelete();
+            this.HasRequired(v => v.Factor);
         }
     }
 }
