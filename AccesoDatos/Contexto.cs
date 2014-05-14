@@ -9,8 +9,8 @@ namespace AccesoDatos
     {
         public Contexto()
 
-             : base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
-           // : base("TrabajoPracticoBD")
+           // : base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
+            : base("TrabajoPracticoBD")
         {
         }
         

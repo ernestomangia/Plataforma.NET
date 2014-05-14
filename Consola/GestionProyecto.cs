@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 
 using AccesoDatos;
+using Modelo;
 
 namespace Consola
 {
-    using System.Data.Entity;
-    using System.Data.Entity.Validation;
-
-    using Modelo;
-
     public class GestionProyecto
     {
         public string DibujarMenuProyecto()
@@ -33,29 +32,31 @@ namespace Consola
         {
             Console.WriteLine("----------------------Listado de Proyectos----------------------");
             Console.WriteLine(
-                            "ID".PadRight(5),
-                            "Título".PadRight(50),
-                            "Descripcion".PadRight(50),
+                            "{0} | {1} | {2} | {3} | {4} | {5} | {6}",
+                            "ID".PadRight(3),
+                            "Título".PadRight(10),
+                            "Descripcion".PadRight(12),
                             "Fecha".PadRight(16),
                             "VC".PadRight(5),
                             "Tipo".PadRight(10),
-                            "Gerente".PadRight(50));
+                            "Gerente".PadRight(10));
+
             using (var contexto = new Contexto())
             {
                 foreach (var p in contexto.ProyectosCaracterizados.Include(p => p.Gerente))
                 {
                     Console.WriteLine(
                         "{0} | {1} | {2} | {3} | {4} | {5} | {6}",
-                        p.Codigo.ToString().PadRight(5),
-                        p.Titulo.PadRight(50),
-                        p.Descripcion.PadRight(50),
+                        p.Codigo.ToString().PadRight(3),
+                        p.Titulo.PadRight(10),
+                        p.Descripcion.PadRight(12),
                         p.Fecha.ToString("dd/MM/yyyy hh:ss").PadRight(16),
                         p.ValorCaracterizacion.ToString().PadRight(5),
-                        p.TipoProyecto.PadRight(10),
-                        p.Gerente.Nombre.PadRight(50));
+                        (p.TipoProyecto ?? string.Empty).PadRight(10),
+                        (p.Gerente != null ? p.Gerente.Nombre.PadRight(10) : string.Empty).PadRight(10));
                 }
 
-                if (!contexto.Gerentes.Any())
+                if (!contexto.ProyectosCaracterizados.Any())
                     Console.WriteLine("No hay proyectos cargados.");
             }
         }
@@ -67,6 +68,7 @@ namespace Consola
             var nombre = Console.ReadLine();
             Console.WriteLine("Ingrese Descripción:");
             var descripcion = Console.ReadLine();
+            Console.WriteLine();
 
             var proyecto = new ProyectoCaracterizadoModelo
             {
@@ -80,24 +82,84 @@ namespace Consola
                 contexto.ProyectosCaracterizados.Add(proyecto);
                 try
                 {
-                    contexto.SaveChanges();
+                    if (contexto.SaveChanges() == 1)
+                        Console.WriteLine("Se agregó exitosamente el Proyecto");
                 }
                 catch (DbEntityValidationException ex)
                 {
-                    Console.WriteLine("Error al insertar. Intente nuevamente. Presione una tecla para continuar.");
-                    Console.ReadKey();
+                    Console.WriteLine("Error al insertar. Intente nuevamente.");
+
+                    // Console.ReadKey();
                 }
             }
         }
 
         public void EliminarProyecto()
         {
+            Console.WriteLine("----------------------BAJA PROYECTO----------------------");
+            Console.WriteLine("Ingrese el ID del Proyecto que desea eliminar. Luego presione enter:");
 
+            var id = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            using (var contexto = new Contexto())
+            {
+                var proyectoUpdate = contexto.ProyectosCaracterizados.Find(id);
+
+                if (proyectoUpdate != null)
+                {
+                    contexto.ProyectosCaracterizados.Remove(proyectoUpdate);
+                    try
+                    {
+                        if (contexto.SaveChanges() == 1) Console.WriteLine("Se eliminó exitosamente el Proyecto");
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        Console.WriteLine(
+                            "No se puede borrar el Proyecto seleccionado debido a que esta relacionado a otra/s entidad/es");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("El ID del Proyecto ingresado no existe");
+                }
+            }
         }
 
         public void ModificarProyecto()
         {
+            Console.WriteLine("----------------------MODIFICAR PROYECTO----------------------");
+            Console.WriteLine("Ingrese el ID del Proyecto que desea modificar. Luego presione enter:");
 
+            var id = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            using (var contexto = new Contexto())
+            {
+                var proyectoUpdate = contexto.ProyectosCaracterizados.Find(id);
+                if (proyectoUpdate != null)
+                {
+                    Console.WriteLine("Ingrese Titulo:");
+                    proyectoUpdate.Titulo = Console.ReadLine();
+                    Console.WriteLine("Ingrese Descripción");
+                    proyectoUpdate.Descripcion = Console.ReadLine();
+                    Console.WriteLine();
+
+                    try
+                    {
+                        if (contexto.SaveChanges() == 1)
+                            Console.WriteLine("Se modificó exitosamente el Proyecto");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Error al modificar un Proyecto.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("El ID del Proyecto ingresado no existe");
+                }
+            }
         }
     }
 }
