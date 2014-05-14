@@ -76,6 +76,8 @@ namespace Consola
 
                                 var idGerente = Convert.ToInt32(Console.ReadLine());
 
+                                
+
                                 using (var contexto = new Contexto())
                                 {
                                     contexto.Gerentes.Remove(contexto.Gerentes.Find(idGerente));
@@ -158,11 +160,22 @@ namespace Consola
                         var gestion = new GestionFactor();
                         var opcionFactor = gestion.DibujarMenuFactor();
 
-                        switch (opcionFactor)
-                        {case "1":
-                                gestion.AltaFactor();
+                        while(opcionFactor!="4")
+                        {switch (opcionFactor)
+                        {   case "1":
+                               
+                                    gestion.AltaFactor();
                                 break;
 
+                            case "2":
+                                gestion.BajaFactor();
+                                break;
+
+                            case "3":
+                                gestion.ModificarFactor();
+                                break;
+                        }
+                            opcionFactor = gestion.DibujarMenuFactor();
                         }
 
 
