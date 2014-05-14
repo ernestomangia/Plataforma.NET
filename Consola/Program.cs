@@ -6,6 +6,7 @@ using Modelo;
 
 namespace Consola
 {
+    using System.Collections.Generic;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
 
@@ -44,7 +45,15 @@ namespace Consola
                                     Nombre = nombre,
                                     Apellido = apellido,
                                     Password = password,
-                                    User = user
+                                    User = user,
+                                    ProyectoCaracterizados = new List<ProyectoCaracterizadoModelo>
+                                                                 {
+                                                                     new ProyectoCaracterizadoModelo()
+                                                                         {
+                                                                             Titulo = "asd"
+                                                                         },
+                                                                     new ProyectoCaracterizadoModelo()
+                                                                 }
                                 };
 
                                 using (var contexto = new Contexto())
