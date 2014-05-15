@@ -15,34 +15,25 @@ namespace Consola
     {
         public string DibujarMenuFactor()
         {
-            Console.WriteLine("----------------------MENU FACTOR----------------------");
+            Console.WriteLine("----------------------| MENU FACTOR |----------------------");
             Console.WriteLine("1 - Alta Factor");
             Console.WriteLine("2 - Baja Factor");
-            Console.WriteLine("3 - Modificacion Factor");
+            Console.WriteLine("3 - Modificación Factor");
             Console.WriteLine("4 - Menu Principal");
             Console.WriteLine();
-
-            ListarFactores();
-
-            Console.WriteLine();
-            Console.WriteLine();
+            this.ListarFactores();
             Console.WriteLine("Ingrese una opcion");
             var opcionFactor = Console.ReadKey().KeyChar.ToString();
             Console.Clear();
             return opcionFactor;
-
-
         }
 
         public void ListarFactores()
         {
-            Console.WriteLine("----------------------Listado de Factores----------------------");
-
+            Console.WriteLine("----------------------| LISTADO DE FACTORES |----------------------");
             using (var contexto = new Contexto())
             {
-
                 var factores = contexto.Factores.Include(b => b.Valores).ToList();
-
                 foreach (var f in factores)
                 {
                     Console.WriteLine("ID: {0}", f.Codigo);
@@ -51,19 +42,16 @@ namespace Consola
                     Console.WriteLine("Valor 2: {0}", f.Valores[1].Nombre);
                     Console.WriteLine("Valor 3: {0}", f.Valores[2].Nombre);
                     Console.WriteLine();
-
                 }
-
 
                 if (!contexto.Factores.Any())
                     Console.WriteLine("No hay factores cargados.");
             }
-
         }
 
         public void AltaFactor()
         {
-            Console.WriteLine("----------------------ALTA FACTOR----------------------");
+            Console.WriteLine("----------------------| ALTA FACTOR |----------------------");
             Console.WriteLine("Ingrese Nombre");
             var nombre = Console.ReadLine();
             Console.WriteLine("VALOR 0");
@@ -80,17 +68,13 @@ namespace Consola
             var factor = new FactorModelo
             {
                 Nombre = nombre,
-
                 Valores = new List<ValorFactorModelo>
                 {
-
-
                     new ValorFactorModelo()
                     {
                         Nombre = v1,
                         Valor = 0
                     },
-
                     new ValorFactorModelo()
                     {
 
@@ -98,7 +82,6 @@ namespace Consola
                         Valor = 1
 
                     },
-
                     new ValorFactorModelo()
                     {
                         Nombre = v3,
@@ -107,7 +90,6 @@ namespace Consola
                 }
             };
 
-
             using (var contexto = new Contexto())
             {
                 contexto.Factores.Add(factor);
@@ -115,23 +97,20 @@ namespace Consola
                 try
                 {
                     if (contexto.SaveChanges() == 1)
-                        Console.WriteLine("Se ha insertado correctamente.");
+                        Console.WriteLine("Se agregó exitosamente el Factor");
                 }
-
                 catch (DbEntityValidationException ex)
                 {
-                    Console.WriteLine("No se ha podido insertar.");
+                    Console.WriteLine("Error al insertar. Intente nuevamente.");
                 }
             }
-
         }
 
-        public void BajaFactor()
+        public void EliminarFactor()
         {
-            ListarFactores();
-            Console.WriteLine();
-            Console.WriteLine("----------------------BAJA FACTOR----------------------");
-            Console.WriteLine("Ingrese el ID del factor");
+            this.ListarFactores();
+            Console.WriteLine("----------------------| BAJA FACTOR |----------------------");
+            Console.WriteLine("Ingrese el ID del Factor que desea eliminar. Luego presione enter:");
             var idFactor = Console.ReadLine();
 
             int id;
@@ -142,38 +121,33 @@ namespace Consola
                 return;
             }
 
-
             using (var contexto = new Contexto())
             {
-                var factorBuscado = contexto.Factores.Find(idFactor);
-                if(factorBuscado != null)
+                var factorBuscado = contexto.Factores.Find(id);
+
+                if (factorBuscado != null)
                 {
                     contexto.Factores.Remove(factorBuscado);
-
                     try
                     {
                         if (contexto.SaveChanges() == 1)
-                            Console.WriteLine("Se ha eliminado exitosamente");
+                            Console.WriteLine("Se eliminó exitosamente el Factor");
                     }
-
                     catch (DbUpdateException ex)
                     {
-                        Console.WriteLine(
-                            "No se puede borrar el factor seleccionado.");
+                        Console.WriteLine("No se puede borrar el Factor seleccionado debido a que esta relacionado a otra/s entidad/es");
                     }
-
                 }
-                else Console.WriteLine("El ID del factor ingresado no existe");
-
+                else Console.WriteLine("El ID del Factor ingresado no existe");
             }
         }
 
         public void ModificarFactor()
         {
-            ListarFactores();
-            Console.WriteLine();
-            Console.WriteLine("----------------------MODIFICAR FACTOR----------------------");
-            Console.WriteLine("Ingrese el ID de factor.");
+            this.ListarFactores();
+            Console.WriteLine("----------------------| MODIFICAR FACTOR |----------------------");
+            Console.WriteLine("Ingrese el ID del Factor que desea modificar. Luego presione enter:");
+
             var idFactor = Console.ReadLine();
 
             int id;
@@ -184,39 +158,35 @@ namespace Consola
                 return;
             }
 
-
             using (var contexto = new Contexto())
             {
+                var factorUpdate = contexto.Factores.Where(b => b.Codigo == id).Include(v => v.Valores).FirstOrDefault();
 
-                var factorUpdate = contexto.Factores.Where(b => b.Codigo == Convert.ToInt32(idFactor)).Include(v => v.Valores).FirstOrDefault();
                 if (factorUpdate != null)
                 {
-                    Console.WriteLine("Ingrese nombre de factor");
+                    Console.WriteLine("Ingrese Nombre:");
                     factorUpdate.Nombre = Console.ReadLine();
                     Console.WriteLine();
-                    Console.WriteLine("Ingrese nombre del valor 1 asociado al factor");
+                    Console.WriteLine("Ingrese Nombre del VALOR 1 asociado al factor:");
                     factorUpdate.Valores[0].Nombre = Console.ReadLine();
-                    Console.WriteLine("Ingrese nombre del valor 2 asociado al factor");
+                    Console.WriteLine("Ingrese Nombre del VALOR 2 asociado al factor:");
                     factorUpdate.Valores[1].Nombre = Console.ReadLine();
-                    Console.WriteLine("Ingrese nombre del valor 3 asociado al factor");
+                    Console.WriteLine("Ingrese Nombre del VALOR 3 asociado al factor:");
                     factorUpdate.Valores[2].Nombre = Console.ReadLine();
 
                     try
                     {
                         if (contexto.SaveChanges() == 1)
-                            Console.WriteLine("Se ha modificado exitosamente...");
+                            Console.WriteLine("Se modificó exitosamente el Factor");
                     }
                     catch (DbUpdateException exception)
                     {
-                        Console.WriteLine("No se ha podido modificar");
+                        Console.WriteLine("Error al modificar un Factor.");
                     }
                 }
-                else Console.WriteLine("El ID de factor ingresado no existe.");
+                else Console.WriteLine("El ID de Factor ingresado no existe.");
             }
-            
         }
-
-
     }
 }
 

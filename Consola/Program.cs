@@ -83,8 +83,9 @@ namespace Consola
                         }
                         break;
                     case "C":
-                        var opcionFactor = gestionFactor.DibujarMenuFactor();
 
+                        // Menu Factor
+                        var opcionFactor = gestionFactor.DibujarMenuFactor();
                         while (opcionFactor != "4")
                         {
                             switch (opcionFactor)
@@ -94,9 +95,8 @@ namespace Consola
                                     break;
 
                                 case "2":
-                                    gestionFactor.BajaFactor();
+                                    gestionFactor.EliminarFactor();
                                     break;
-
                                 case "3":
                                     gestionFactor.ModificarFactor();
                                     break;
