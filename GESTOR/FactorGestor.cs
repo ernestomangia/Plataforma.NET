@@ -1,40 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AccesoDatos;
 using DTO;
 using Modelo;
-
+using Repositorio;
 
 namespace Gestor
-{/*
+{
     public class FactorGestor : IGestor<FactorDTO>, IDisposable
     {
-         FactorRepositorio _repositorio;
-         Contexto _ctx;
-         FactorModelo _factor;
+        private FactorRepositorio _repositorio;
+        private Contexto _ctx;
+        private FactorModelo _factor;
 
         public FactorGestor()
         {
             try
             {
                 _ctx = new Contexto();
-                _repositorio= new FactorRepositorio(_ctx);
+                _repositorio = new FactorRepositorio(_ctx);
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
-                throw;
+                throw ex;
             }
-
         }
-        
+
         public void Guardar(FactorDTO f)
         {
-
             try
             {
                 if (f.Codigo > 0)
@@ -50,32 +45,25 @@ namespace Gestor
                 }
                 _repositorio.Guardar(_factor, _factor.Codigo);
             }
-
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
+                throw ex;
             }
-
-
-
         }
-        
+
         public void Eliminar(FactorDTO f)
         {
             try
             {
                 _factor = _repositorio.GetById(f.Codigo);
-                _repositorio.eliminar(_factor);
+                _repositorio.Eliminar(_factor);
             }
-
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
-
+                throw ex;
             }
-
         }
 
         public FactorDTO GetById(int id)
@@ -87,10 +75,10 @@ namespace Gestor
                 _fDTO = ModeloaDTO(_repositorio.GetById(id));
 
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
+                throw ex;
             }
 
             return _fDTO;
@@ -106,13 +94,13 @@ namespace Gestor
 
                 foreach (FactorModelo f in _fLista)
                 {
-                    _fDTOLista.Add(ModeloaDTO(f));
+                    _fDTOLista.Add(this.ModeloaDTO(f));
                 }
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
+                throw ex;
             }
             return _fDTOLista;
         }
@@ -124,7 +112,7 @@ namespace Gestor
 
         public void Dispose()
         {
-            GC.SuppressFinalize(this); 
+            GC.SuppressFinalize(this);
         }
 
         private void ActualizaFactor(FactorModelo _factorMod, FactorModelo _factor)
@@ -133,33 +121,28 @@ namespace Gestor
             _factor.Nombre = _factorMod.Nombre;
             _factor.Valores = _factorMod.Valores;
             _factor.Proyectos = _factorMod.Proyectos;
-
         }
-
-
 
         private FactorModelo DTOaModelo(FactorDTO _fDTO)
         {
-            var _factor = new FactorModelo();
-            _factor.Nombre = _fDTO.Nombre;
-            _factor.Codigo = _fDTO.Codigo;
-            _factor.Valores = _fDTO.Valores;
-            _factor.Proyectos = _fDTO.Proyectos;
+            var factor = new FactorModelo();
+            factor.Nombre = _fDTO.Nombre;
+            factor.Codigo = _fDTO.Codigo;
+            factor.Valores = _fDTO.Valores;
+            factor.Proyectos = _fDTO.Proyectos;
 
-            return _factor;
+            return factor;
         }
 
         private FactorDTO ModeloaDTO(FactorModelo _f)
         {
-            var _fDTO = new FactorDTO();
-            _fDTO.Nombre = _f.Nombre;
-            _fDTO.Codigo = _f.Codigo;
-            _fDTO.Valores = _f.Valores;
-            _fDTO.Proyectos = _f.Proyectos;
+            var fDTO = new FactorDTO();
+            fDTO.Nombre = _f.Nombre;
+            fDTO.Codigo = _f.Codigo;
+            fDTO.Valores = _f.Valores;
+            fDTO.Proyectos = _f.Proyectos;
 
-
-
+            return fDTO;
         }
-
-    }*/
+    }
 }

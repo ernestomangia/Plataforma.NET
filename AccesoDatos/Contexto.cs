@@ -7,10 +7,15 @@ namespace AccesoDatos
 {
     public class Contexto : DbContext
     {
-        public Contexto()
+        static Contexto()
+        {
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contexto>());
+            Database.SetInitializer<Contexto>(null);
+        }
 
-            : base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
-           // : base("TrabajoPracticoBD")
+        public Contexto()
+            //: base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
+            : base("Data Source=.\\SQLExpress;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
         {
         }
         

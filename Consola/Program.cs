@@ -2,6 +2,8 @@
 using System.Data.Entity;
 
 using AccesoDatos;
+using DTO;
+using Gestor;
 
 namespace Consola
 {
@@ -9,6 +11,15 @@ namespace Consola
     {
         public static void Main(string[] args)
         {
+            FactorGestor g = new FactorGestor();
+            //FactorDTO a = g.GetById(2);
+            foreach (var f in g.Listar())
+            {
+                Console.WriteLine(f.Nombre);
+                
+            }
+
+
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contexto>());
             var gestionProyecto = new GestionProyecto();
             var gestionGerente = new GestionGerente();

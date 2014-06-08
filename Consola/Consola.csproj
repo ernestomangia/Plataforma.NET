@@ -63,6 +63,14 @@
       <Project>{f7a251a4-81c4-4e24-890c-9dbe832e6443}</Project>
       <Name>AccesoDatos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{9b2ff63e-4b0c-45b7-addb-6ca4b3bbb7ca}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GESTOR\Gestor.csproj">
+      <Project>{73e5da9f-9b31-4dc1-9f8d-02706b963fb4}</Project>
+      <Name>Gestor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modelo\Modelo.csproj">
       <Project>{E3302608-16C1-4A02-8663-15971D31C55D}</Project>
       <Name>Modelo</Name>

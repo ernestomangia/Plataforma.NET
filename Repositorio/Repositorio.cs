@@ -22,12 +22,12 @@ namespace Repositorio
 
         #endregion
 
-        T IRepositorio<T>.GetById(int id)
+        public T GetById(int id)
         {
             return DbSet.Find(id);
         }
 
-        void IRepositorio<T>.Guardar(T entidad, int id)
+        public void Guardar(T entidad, int id)
         {
             if (id == 0)
             {
@@ -37,7 +37,7 @@ namespace Repositorio
             Context.SaveChanges();
         }
 
-        IQueryable<T> IRepositorio<T>.Listar()
+        public IQueryable<T> Listar()
         {
             return DbSet;
         }
