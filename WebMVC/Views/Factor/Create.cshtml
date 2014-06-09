@@ -1,0 +1,32 @@
+﻿@model DTO.FactorDTO
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Nuevo Factor</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<a class="btn btn-primary" href="@Url.Action("Index", "Factor")">
+    Volver al Listado
+</a>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

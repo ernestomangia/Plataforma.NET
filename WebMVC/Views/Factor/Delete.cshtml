@@ -1,0 +1,26 @@
+﻿@model DTO.FactorDTO
+
+@{
+    ViewBag.Title = "Eliminar Factor";
+}
+
+<h2>Eliminar Factor</h2>
+
+<h4>Esta seguro que desea eliminar el factor y todos sus valores?</h4>
+<div>
+    <h4>Nombre: @Model.Nombre</h4>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" />
+            <a class="btn btn-default" href="@Url.Action("Index", "Factor")">
+                Cancelar
+            </a>
+        </div>
+    }
+</div>

@@ -120,7 +120,7 @@ namespace Gestor
             _factor.Codigo = _factorMod.Codigo;
             _factor.Nombre = _factorMod.Nombre;
             _factor.Valores = _factorMod.Valores;
-            _factor.Proyectos = _factorMod.Proyectos;
+            //_factor.Proyectos = _factorMod.Proyectos;
         }
 
         private FactorModelo DTOaModelo(FactorDTO _fDTO)
@@ -141,7 +141,7 @@ namespace Gestor
             fDTO.Codigo = _f.Codigo;
             fDTO.Valores = _f.Valores;
             fDTO.Proyectos = _f.Proyectos;
-
+            
             return fDTO;
         }
     }

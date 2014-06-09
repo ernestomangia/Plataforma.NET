@@ -1,0 +1,18 @@
+﻿@model DTO.FactorDTO
+
+@{
+    ViewBag.Title = "Detalle Factor";
+}
+
+<h2>Detalle de Factor</h2>
+
+<div>
+	<hr />
+    <dl class="dl-horizontal">
+        Nombre: @Model.Nombre
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Volver al listado", "Index")
+</p>

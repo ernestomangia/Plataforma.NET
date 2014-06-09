@@ -1,31 +1,41 @@
 ﻿@model IEnumerable<DTO.FactorDTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado Factor";
 }
 
-<h2>Index</h2>
+<h2>Factores</h2>
+<h4>Listado de Factores</h4>
 
-<p>
-    @* @Html.ActionLink("Create New", "Create")*@
-</p>
-<table class="table">
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-    </tr>
-
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>
+                <a class="pull-right btn btn-success btn-sm" href="@Url.Action("Create", "Factor")">
+                    <span class="glyphicon glyphicon-plus"></span> Nuevo Factor
+                </a>
+            </th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
             <td>@item.Codigo</td>
+            <td>@item.Nombre</td>
             <td>
-                @item.Nombre
-                @*
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                *@
+                <div class="btn-group btn-group-sm pull-right">
+                    <a class="btn btn-default" href="@Url.Action("Details", "Factor", new { id = item.Codigo })">
+                        <span class="glyphicon glyphicon-eye-open"></span> Detalle
+                    </a>
+                    <a class="btn btn-default" href="@Url.Action("Edit", "Factor", new { id = item.Codigo })">
+                        <span class="glyphicon glyphicon-edit"></span> Editar
+                    </a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Factor", new { id = item.Codigo })">
+                        <span class="glyphicon glyphicon-trash"></span> Eliminar
+                    </a>
+                </div>
             </td>
         </tr>
     }
