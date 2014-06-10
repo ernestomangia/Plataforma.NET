@@ -1,33 +1,38 @@
-﻿using Modelo;
+﻿using System.Collections.Generic;
+
+using Modelo;
 
 namespace DTO
 {
-    using System.Linq;
-
     public class FactorDTO : FactorModelo
     {
         public FactorDTO()
             : base()
         {
+            ValoresFactores = new List<ValorFactorDTO>();
         }
+
+        public List<ValorFactorDTO> ValoresFactores { get; set; }
 
         public ValorFactorDTO Valor1
         {
             get
             {
-                var valorFactorModelo = Valores[0];
-                return new ValorFactorDTO
-                           {
-                               Nombre = valorFactorModelo.Nombre,
-                               Codigo = valorFactorModelo.Codigo,
-                               Valor = valorFactorModelo.Valor,
-                               Factor = valorFactorModelo.Factor
-                           };
+                return ValoresFactores.Count == 3 ? ValoresFactores[0] : new ValorFactorDTO();
+
+                //var valorFactorModelo = Valores[0];
+                //return new ValorFactorDTO
+                //           {
+                //               Nombre = valorFactorModelo.Nombre,
+                //               Codigo = valorFactorModelo.Codigo,
+                //               Valor = valorFactorModelo.Valor,
+                //               Factor = valorFactorModelo.Factor
+                //           };
             }
 
             set
             {
-                this.Valores.Add(value);
+                this.ValoresFactores.Add(value);
             }
         }
 
@@ -35,19 +40,12 @@ namespace DTO
         {
             get
             {
-                var valorFactorModelo = Valores[1];
-                return new ValorFactorDTO
-                {
-                    Nombre = valorFactorModelo.Nombre,
-                    Codigo = valorFactorModelo.Codigo,
-                    Valor = valorFactorModelo.Valor,
-                    Factor = valorFactorModelo.Factor
-                };
+                return ValoresFactores.Count == 3 ? ValoresFactores[1] : new ValorFactorDTO();
             }
 
             set
             {
-                this.Valores.Add(value);
+                this.ValoresFactores.Add(value);
             }
         }
 
@@ -55,19 +53,12 @@ namespace DTO
         {
             get
             {
-                var valorFactorModelo = Valores[2];
-                return new ValorFactorDTO
-                {
-                    Nombre = valorFactorModelo.Nombre,
-                    Codigo = valorFactorModelo.Codigo,
-                    Valor = valorFactorModelo.Valor,
-                    Factor = valorFactorModelo.Factor
-                };
+                return ValoresFactores.Count == 3 ? ValoresFactores[2] : new ValorFactorDTO();
             }
 
             set
             {
-                this.Valores.Add(value);
+                this.ValoresFactores.Add(value);
             }
         }
     }

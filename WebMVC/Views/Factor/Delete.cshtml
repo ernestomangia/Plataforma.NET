@@ -8,12 +8,14 @@
 
 <h4>Esta seguro que desea eliminar el factor y todos sus valores?</h4>
 <div>
-    <h4>Nombre: @Model.Nombre</h4>
+    <h4>Nombre: <b>@Model.Nombre</b></h4>
     <hr />
     <dl class="dl-horizontal"></dl>
 
     @using (Html.BeginForm())
     {
+        @Html.HiddenFor(model => model.Codigo)
+
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

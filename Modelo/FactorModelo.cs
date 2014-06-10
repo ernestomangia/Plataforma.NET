@@ -4,6 +4,11 @@ namespace Modelo
 {
     public class FactorModelo
     {
+        public FactorModelo()
+        {
+            Valores = new List<ValorFactorModelo>();
+        }
+
         public int Codigo { get; set; }
 
         public string Nombre { get; set; }

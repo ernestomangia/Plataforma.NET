@@ -7,12 +7,25 @@
 <h2>Detalle de Factor</h2>
 
 <div>
-	<hr />
+    <hr />
     <dl class="dl-horizontal">
-        Nombre: @Model.Nombre
+        <dt>Nombre</dt>
+        <dd>@Model.Nombre</dd>
+        
+        <dt>Nombre Valor 1</dt>
+        <dd>@Model.Valor1.Nombre</dd>
+        
+        <dt>Nombre Valor 2</dt>
+        <dd>@Model.Valor2.Nombre</dd>
+
+        <dt>Nombre Valor 3</dt>
+        <dd>@Model.Valor3.Nombre</dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Volver al listado", "Index")
-</p>
+
+<a class="btn btn-primary" href="@Url.Action("Index", "Factor")">
+    Volver al Listado
+</a>
+<a class="btn btn-default" href="@Url.Action("Edit", "Factor", new {  id = Model.Codigo })">
+    Editar
+</a>

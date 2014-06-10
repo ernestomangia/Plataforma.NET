@@ -3,8 +3,6 @@ using System.Linq;
 
 namespace Repositorio
 {
-    using System.Linq.Expressions;
-
     public class Repositorio<T> : IRepositorio<T> where T : class
     {
         #region Protected Members

@@ -4,6 +4,5 @@ namespace DTO
 {
     public class ValorFactorDTO : ValorFactorModelo
     {
-
     }
 }

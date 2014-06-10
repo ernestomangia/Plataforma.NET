@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using AccesoDatos;
 using DTO;
 using Modelo;
@@ -36,12 +37,11 @@ namespace Gestor
                 {
                     FactorModelo _factorMod = DTOaModelo(f);
                     _factor = _repositorio.GetById(f.Codigo);
-                    this.ActualizaFactor(_factorMod, _factor);
+                    this.ActualizaFactor(_factorMod);
                 }
                 else
                 {
                     _factor = DTOaModelo(f);
-
                 }
                 _repositorio.Guardar(_factor, _factor.Codigo);
             }
@@ -86,15 +86,15 @@ namespace Gestor
 
         public IList<FactorDTO> Listar()
         {
-            IList<FactorDTO> _fDTOLista = new List<FactorDTO>();
+            IList<FactorDTO> factorDTOLista = new List<FactorDTO>();
 
             try
             {
-                IQueryable<FactorModelo> _fLista = _repositorio.Listar();
+                var fLista = _repositorio.Listar();
 
-                foreach (FactorModelo f in _fLista)
+                foreach (var f in fLista)
                 {
-                    _fDTOLista.Add(this.ModeloaDTO(f));
+                    factorDTOLista.Add(this.ModeloaDTO(f));
                 }
             }
             catch (Exception ex)
@@ -102,7 +102,7 @@ namespace Gestor
                 Console.WriteLine(ex.InnerException);
                 throw ex;
             }
-            return _fDTOLista;
+            return factorDTOLista;
         }
 
         public bool Validar(FactorDTO entidad)
@@ -115,34 +115,60 @@ namespace Gestor
             GC.SuppressFinalize(this);
         }
 
-        private void ActualizaFactor(FactorModelo _factorMod, FactorModelo _factor)
+        #region Private Methods
+
+        private void ActualizaFactor(FactorModelo factorMod)
         {
-            _factor.Codigo = _factorMod.Codigo;
-            _factor.Nombre = _factorMod.Nombre;
-            _factor.Valores = _factorMod.Valores;
-            //_factor.Proyectos = _factorMod.Proyectos;
+            _factor.Nombre = factorMod.Nombre;
+            _factor.Valores[0].Nombre = factorMod.Valores[0].Nombre;
+            _factor.Valores[1].Nombre = factorMod.Valores[1].Nombre;
+            _factor.Valores[2].Nombre = factorMod.Valores[2].Nombre;
         }
 
-        private FactorModelo DTOaModelo(FactorDTO _fDTO)
+        private FactorModelo DTOaModelo(FactorDTO fDTO)
         {
-            var factor = new FactorModelo();
-            factor.Nombre = _fDTO.Nombre;
-            factor.Codigo = _fDTO.Codigo;
-            factor.Valores = _fDTO.Valores;
-            factor.Proyectos = _fDTO.Proyectos;
+            var factor = new FactorModelo
+                             {
+                                 Nombre = fDTO.Nombre,
+                                 Codigo = fDTO.Codigo,
+                                 Proyectos = fDTO.Proyectos
+                             };
+
+            factor.Valores.AddRange(
+                fDTO.ValoresFactores.Select(
+                    item => new ValorFactorModelo
+                                {
+                                    Codigo = item.Codigo,
+                                    Nombre = item.Nombre,
+                                    Valor = item.Valor
+                                }));
 
             return factor;
         }
 
-        private FactorDTO ModeloaDTO(FactorModelo _f)
+        private FactorDTO ModeloaDTO(FactorModelo factorModelo)
         {
-            var fDTO = new FactorDTO();
-            fDTO.Nombre = _f.Nombre;
-            fDTO.Codigo = _f.Codigo;
-            fDTO.Valores = _f.Valores;
-            fDTO.Proyectos = _f.Proyectos;
-            
+            var fDTO = new FactorDTO
+                           {
+                               Codigo = factorModelo.Codigo,
+                               Nombre = factorModelo.Nombre
+                           };
+
+            fDTO.ValoresFactores.AddRange(
+                factorModelo.Valores.Select(
+                    item =>
+                    new ValorFactorDTO
+                        {
+                            Codigo = item.Codigo,
+                            Nombre = item.Nombre,
+                            Valor = item.Valor
+                        }));
+
+            fDTO.Proyectos = factorModelo.Proyectos;
+
             return fDTO;
         }
+
+        #endregion
     }
 }

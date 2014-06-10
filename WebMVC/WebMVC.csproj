@@ -182,6 +182,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate-common.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -218,6 +219,7 @@
     <Content Include="Views\Factor\Delete.cshtml" />
     <Content Include="Views\Factor\Edit.cshtml" />
     <Content Include="Views\Factor\Create.cshtml" />
+    <Content Include="Views\Factor\Shared\Form_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -230,6 +232,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
+      <Project>{f7a251a4-81c4-4e24-890c-9dbe832e6443}</Project>
+      <Name>AccesoDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{9b2ff63e-4b0c-45b7-addb-6ca4b3bbb7ca}</Project>
       <Name>DTO</Name>
