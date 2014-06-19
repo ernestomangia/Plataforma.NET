@@ -14,8 +14,8 @@ namespace AccesoDatos
         }
 
         public Contexto()
-            //: base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
-            : base("Data Source=.\\SQLExpress;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
+            : base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
+            //: base("Data Source=.\\SQLExpress;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
         {
         }
         

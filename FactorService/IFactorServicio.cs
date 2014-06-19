@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 
 namespace FactorService
@@ -8,7 +9,17 @@ namespace FactorService
     public interface IFactorServicio
     {
         [OperationContract]
-        string Listar();
+        IList<Factor> Listar();
+
+        [OperationContract]
+        void Guardar(Factor f);
+
+        [OperationContract]
+        void Eliminar(Factor f);
+
+        [OperationContract]
+        Factor GetById(int id);
+
     }
 
 
@@ -18,6 +29,28 @@ namespace FactorService
     {
 
         [DataMember]
-        public int Id { get; set; }
+        public int Codigo { get; set; }
+
+        [DataMember]
+        public string Nombre { get; set; }
+
+        [DataMember]
+        public List<FactorValor> Valores { get; set; } 
+
     }
+
+    [DataContract]
+    public class FactorValor
+    {
+        [DataMember]
+        public int Codigo { get; set; }
+
+        [DataMember]
+        public string Nombre { get; set; }
+
+        [DataMember]
+        public double Valor { get; set; }
+
+    }
+
 }
