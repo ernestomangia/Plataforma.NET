@@ -19,7 +19,6 @@ namespace FactorService
 
         [OperationContract]
         Factor GetById(int id);
-
     }
 
 
@@ -27,6 +26,10 @@ namespace FactorService
     [DataContract]
     public class Factor
     {
+        public Factor()
+        {
+            Valores = new List<FactorValor>();
+        }
 
         [DataMember]
         public int Codigo { get; set; }
@@ -38,13 +41,13 @@ namespace FactorService
         public List<FactorValor> Valores { get; set; }
 
         [DataMember]
-        FactorValor Valor1 { get; set; }
+        public FactorValor Valor1 { get; set; }
 
         [DataMember]
-        FactorValor Valor2 { get; set; }
+        public FactorValor Valor2 { get; set; }
 
         [DataMember]
-        FactorValor Valor3 { get; set; }
+        public FactorValor Valor3 { get; set; }
     }
 
     [DataContract]

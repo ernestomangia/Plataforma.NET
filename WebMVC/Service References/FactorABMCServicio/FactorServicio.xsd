@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/FactorService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/FactorService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfFactor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Factor" nillable="true" type="tns:Factor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFactor" nillable="true" type="tns:ArrayOfFactor" />
+  <xs:complexType name="Factor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Valor1" nillable="true" type="tns:FactorValor" />
+      <xs:element minOccurs="0" name="Valor2" nillable="true" type="tns:FactorValor" />
+      <xs:element minOccurs="0" name="Valor3" nillable="true" type="tns:FactorValor" />
+      <xs:element minOccurs="0" name="Valores" nillable="true" type="tns:ArrayOfFactorValor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Factor" nillable="true" type="tns:Factor" />
+  <xs:complexType name="FactorValor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Valor" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FactorValor" nillable="true" type="tns:FactorValor" />
+  <xs:complexType name="ArrayOfFactorValor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FactorValor" nillable="true" type="tns:FactorValor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFactorValor" nillable="true" type="tns:ArrayOfFactorValor" />
+</xs:schema>

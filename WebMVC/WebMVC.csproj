@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -167,6 +169,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\FactorABMCServicio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +198,13 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\FactorABMCServicio\FactorServicio.disco" />
+    <None Include="Service References\FactorABMCServicio\configuration91.svcinfo" />
+    <None Include="Service References\FactorABMCServicio\configuration.svcinfo" />
+    <None Include="Service References\FactorABMCServicio\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -220,6 +234,19 @@
     <Content Include="Views\Factor\Edit.cshtml" />
     <Content Include="Views\Factor\Create.cshtml" />
     <Content Include="Views\Factor\Shared\Form_Partial.cshtml" />
+    <None Include="Service References\FactorABMCServicio\FactorServicio.wsdl" />
+    <None Include="Service References\FactorABMCServicio\FactorServicio.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactorABMCServicio\FactorServicio1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactorABMCServicio\FactorServicio2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\FactorABMCServicio\WebMVC.FactorABMCServicio.Factor.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -248,6 +275,12 @@
       <Project>{e3302608-16c1-4a02-8663-15971d31c55d}</Project>
       <Name>Modelo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FactorABMCServicio\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

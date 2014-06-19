@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="da862f62-8f66-4df5-9134-70f17f5576c1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6615/FactorServicio.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FactorServicio.xsd" MetadataType="Schema" ID="5ab6f03f-141e-4e6d-a5b9-4b2fdfbe0b50" SourceId="1" SourceUrl="http://localhost:6615/FactorServicio.svc?xsd=xsd2" />
+    <MetadataFile FileName="FactorServicio.disco" MetadataType="Disco" ID="625df32f-17ee-4056-b2a2-735406cedfde" SourceId="1" SourceUrl="http://localhost:6615/FactorServicio.svc?disco" />
+    <MetadataFile FileName="FactorServicio1.xsd" MetadataType="Schema" ID="ccccfb22-fb9e-4355-9078-7d6e67939f0f" SourceId="1" SourceUrl="http://localhost:6615/FactorServicio.svc?xsd=xsd1" />
+    <MetadataFile FileName="FactorServicio.wsdl" MetadataType="Wsdl" ID="c2abdbd3-d937-4f8b-892f-424d5d6bf88c" SourceId="1" SourceUrl="http://localhost:6615/FactorServicio.svc?wsdl" />
+    <MetadataFile FileName="FactorServicio2.xsd" MetadataType="Schema" ID="e59adba9-6673-4312-837c-6bd40cf75f90" SourceId="1" SourceUrl="http://localhost:6615/FactorServicio.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

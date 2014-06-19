@@ -3,24 +3,29 @@ using Gestor;
 using System.Linq;
 using System.Web.Mvc;
 
+using WebMVC.FactorABMCServicio;
+
 namespace WebMVC.Controllers
 {
     public class FactorController : Controller
     {
-        private FactorGestor factorGestor = new FactorGestor();
+        //private FactorGestor factorGestor = new FactorGestor();
+        private FactorServicioClient factorServicio = new FactorServicioClient();
 
         //
         // GET: /Factor/
         public ActionResult Index()
         {
-            return this.View(this.factorGestor.Listar().ToList());
+            return this.View(factorServicio.Listar().ToList());
+            //return this.View(this.factorGestor.Listar().ToList());
         }
 
         //
         // GET: /Factor/Details/5
         public ActionResult Details(int id)
         {
-            var factor = this.factorGestor.GetById(id);
+            //var factor = this.factorGestor.GetById(id);
+            var factor = this.factorServicio.GetById(id);
             return View(factor);
         }
 
@@ -34,11 +39,13 @@ namespace WebMVC.Controllers
         //
         // POST: /Factor/Create
         [HttpPost]
-        public ActionResult Create(FactorDTO factorDto)
+        public ActionResult Create(Factor factor)
         {
             try
             {
-                this.factorGestor.Guardar(factorDto);
+                //this.factorGestor.Guardar(factor);
+
+                this.factorServicio.Guardar(factor);
                 return RedirectToAction("Index");
             }
             catch
@@ -51,19 +58,22 @@ namespace WebMVC.Controllers
         // GET: /Factor/Edit/5
         public ActionResult Edit(int id)
         {
-            var factor = this.factorGestor.GetById(id);
+            //var factor = this.factorGestor.GetById(id);
+
+            var factor = this.factorServicio.GetById(id);
             return View(factor);
         }
 
         //
         // POST: /Factor/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FactorDTO factorDto)
+        public ActionResult Edit(int id, Factor factor)
         {
             try
             {
-                // TODO: Add update logic here
-                this.factorGestor.Guardar(factorDto);
+                //this.factorGestor.Guardar(factor);
+
+                this.factorServicio.Guardar(factor);
                 return RedirectToAction("Index");
             }
             catch
@@ -76,19 +86,21 @@ namespace WebMVC.Controllers
         // GET: /Factor/Delete/5
         public ActionResult Delete(int id)
         {
-            var factor = this.factorGestor.GetById(id);
+            //var factor = this.factorGestor.GetById(id);
+            var factor = this.factorServicio.GetById(id);
             return View(factor);
         }
 
         //
         // POST: /Factor/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FactorDTO factorDto)
+        public ActionResult Delete(int id, Factor factor)
         {
             try
             {
                 // TODO: Add delete logic here
-                this.factorGestor.Eliminar(factorDto);
+                //this.factorGestor.Eliminar(factor);
+                this.factorServicio.Eliminar(factor);
                 return RedirectToAction("Index");
             }
             catch

@@ -5,6 +5,8 @@ using Modelo;
 
 namespace AccesoDatos
 {
+    using System.Data.Entity.Infrastructure;
+
     public class Contexto : DbContext
     {
         static Contexto()
@@ -14,9 +16,10 @@ namespace AccesoDatos
         }
 
         public Contexto()
-            : base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
-            //: base("Data Source=.\\SQLExpress;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
+            //: base("Data Source=D-PC;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
+            : base("Data Source=.\\SQLExpress;Initial Catalog=TrabajoPracticoBD;Integrated Security=True")
         {
+            
         }
         
         public DbSet<GerenteModelo> Gerentes { get; set; }
