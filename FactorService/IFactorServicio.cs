@@ -35,8 +35,16 @@ namespace FactorService
         public string Nombre { get; set; }
 
         [DataMember]
-        public List<FactorValor> Valores { get; set; } 
+        public List<FactorValor> Valores { get; set; }
 
+        [DataMember]
+        FactorValor Valor1 { get; set; }
+
+        [DataMember]
+        FactorValor Valor2 { get; set; }
+
+        [DataMember]
+        FactorValor Valor3 { get; set; }
     }
 
     [DataContract]
