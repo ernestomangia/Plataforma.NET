@@ -43,6 +43,7 @@ namespace Gestor
                 {
                     _factor = DTOaModelo(f);
                 }
+
                 _repositorio.Guardar(_factor, _factor.Codigo);
             }
             catch (Exception ex)
@@ -143,6 +144,9 @@ namespace Gestor
                                     Valor = item.Valor
                                 }));
 
+            factor.Valores[0].Valor = 0;
+            factor.Valores[1].Valor = 1;
+            factor.Valores[2].Valor = 2;
             return factor;
         }
 
